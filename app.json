@@ -1,28 +1,21 @@
-'use strict'
-const http = require('http')
-const Bot = require('messenger-bot')
-
-let bot = new Bot({
-  token: 'EAAG3oMzKupEBAF5UkkjqV2gCzx3JzpuUKmdLzEV4xBrAz40UKsbnlzxyCZCvRny8kIDNTqvRir1Mj27ptyV9lAgq2nvYpb9ZBVJcHiCkoYpijbCvDrTYLXfDZBm6OQ0jD7EW88nHgPW5J5JAMZBKspcVq5bROvfLsRTiaTZBBLQZDZD',
-  verify: 'just_do_it'
-})
-
-bot.on('error', (err) => {
-  console.log(err.message)
-})
-
-bot.on('message', (payload, reply) => {
-  let text = payload.message.text
-
-  bot.getProfile(payload.sender.id, (err, profile) => {
-    if (err) throw err
-
-    reply({ text }, (err) => {
-      if (err) throw err
-
-      console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`)
-    })
-  })
-})
-
-http.createServer(bot.middleware()).listen(3000)
+{
+  "name": "Wit-Facebook-bot",
+  "description": "Wit-Facebook Messenger Bot Demo.",
+  "repository": "https://github.com/dnzengou/WitAI-Facebook-Messenger-chatbot-boilerplate.git",
+  "logo": "",
+  "keywords": ["node", "express", "github", "wit", "bot", "fcaebook"],
+  "env": {
+    "WIT_TOKEN": {
+      "description": "Server Access Token from wit.ai (see your wit app settings).",
+      "required": true
+    },
+    "FB_PAGE_TOKEN": {
+      "description": "Facebook Page Token from https://developers.facebook.com/apps/",
+      "required": true
+    },
+    "FB_VERIFY_TOKEN": {
+      "description": "Facebook verification Token. You can make it up.",
+      "required": false
+    }
+  }
+}
